@@ -1,0 +1,34 @@
+using UnityEngine;
+
+public class Ammo : MonoBehaviour
+{
+    [SerializeField] private float lifeSpan = 3f;
+    [SerializeField] private int damage = 1;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        Object.Destroy(gameObject, lifeSpan); //que this object up to die
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    public void setDamage(int damage)
+    {
+        this.damage = damage; 
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        StatBlock block = collision.gameObject.GetComponent<StatBlock>();
+        if(block != null)
+        {
+            block.takeDamage(damage);
+            Object.Destroy(gameObject);
+        }
+    }
+
+}
