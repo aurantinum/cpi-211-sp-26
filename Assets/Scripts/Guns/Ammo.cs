@@ -23,10 +23,9 @@ public class Ammo : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        StatBlock block = collision.gameObject.GetComponent<StatBlock>();
-        if(block != null)
+        if (collision.collider.gameObject.TryGetComponent<Health>(out var otherHealth))
         {
-            block.takeDamage(damage);
+            otherHealth.TakeDamage(damage);
             Object.Destroy(gameObject);
         }
     }

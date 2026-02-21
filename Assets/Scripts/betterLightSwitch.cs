@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class betterLightSwitch : MonoBehaviour
 {
-    private Light light;
+    private Light sourceLight;
     private float origIntensity;
     private float origRange;
     private Color origColor;
@@ -12,10 +12,10 @@ public class betterLightSwitch : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        light = GetComponent<Light>();
-        origIntensity = light.intensity;
-        origRange = light.range;
-        origColor = light.color;
+        sourceLight = GetComponent<Light>();
+        origIntensity = sourceLight.intensity;
+        origRange = sourceLight.range;
+        origColor = sourceLight.color;
     }
 
     // Update is called once per frame
@@ -29,14 +29,14 @@ public class betterLightSwitch : MonoBehaviour
         if(lightState)
         {
             //light.intensity = origIntensity;
-            light.color = origColor;
+            sourceLight.color = origColor;
             //light.range = origRange;
             //light.enabled = true;
         }
         else
         {
             //light.intensity = 0;
-            light.color = Color.black;
+            sourceLight.color = Color.black;
             //light.range = 0;
             //light.enabled = false;
         }

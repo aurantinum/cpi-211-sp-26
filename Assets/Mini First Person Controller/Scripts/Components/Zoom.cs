@@ -3,7 +3,9 @@
 [ExecuteInEditMode]
 public class Zoom : MonoBehaviour
 {
+#pragma warning disable CS0108 // Member hides inherited member; missing new keyword
     Camera camera;
+#pragma warning restore CS0108 // Member hides inherited member; missing new keyword
     public float defaultFOV = 60;
     public float maxZoomFOV = 15;
     [Range(0, 1)]

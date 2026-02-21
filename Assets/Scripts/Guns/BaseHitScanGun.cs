@@ -6,6 +6,7 @@ public class BaseHitScanGun : MonoBehaviour
     [SerializeField] private float shotDelay = 0.5f;
     [SerializeField] private bool fullAuto = true;
     [SerializeField] private int damage = 1;
+    [SerializeField] GameObject hitLocation;
     private bool canShoot = true;
     private float timer;
 
@@ -32,13 +33,20 @@ public class BaseHitScanGun : MonoBehaviour
         if ((canShoot) && (fullAuto ? Input.GetButton("Fire2") : Input.GetButtonDown("Fire2")))
         {
             canShoot = false;
-            Ray shotRay = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0, 0.5f));
+            Ray shotRay = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
             RaycastHit hit;
 
             if(Physics.Raycast(shotRay, out hit))
             {
                 print("HIT SOMETHING! " + hit.collider.gameObject.name);
+                Instantiate(hitLocation, hit.point, Quaternion.identity);
+
+                if(hit.collider.gameObject.TryGetComponent<Health>(out var otherHealth))
+                {
+                    otherHealth.TakeDamage(damage);
+                }
             }
+
 
         }
     }
